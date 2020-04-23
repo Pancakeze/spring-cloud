@@ -1,0 +1,35 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /client
+#
+#  error:
+#    whitelabel:
+#      enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/server/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+
+spring:
+  application:
+    name: zbz-client
+  cloud:
+    gateway:
+      routes:
+        - id: zbz
+          uri: http://localhost:8888/client/testFallback/1
+          predicates:
+            - Path=/client/zbz
+#    discovery:
+#      locator:
+#        enabled:
+feign:
+  hystrix:
+    enabled: true
+

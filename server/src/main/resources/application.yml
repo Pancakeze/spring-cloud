@@ -1,0 +1,17 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /server
+
+spring:
+  application:
+    name: zbz-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/server/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: localhost
+    prefer-ip-address: true

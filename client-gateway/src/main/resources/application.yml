@@ -1,0 +1,30 @@
+server:
+  port: 8899
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/server/eureka/
+  register-with-eureka: true
+  fetch-registry: true
+
+spring:
+  application:
+    name: client-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: hello_ribbon_route
+          uri: http://localhost:8888
+          predicates:
+            - Path=/client/testFallback/{id}
+#        filters:
+#        - StripPrefix=1
+
+service-url:
+  user-service: http://zbz-client
+
